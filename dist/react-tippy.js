@@ -682,35 +682,20 @@ var Tooltip = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      if (this.props.useSpan) {
-        return _react2.default.createElement(
-          'span',
-          {
-            ref: this.tooltipDOM,
-            title: this.props.title,
-            className: this.props.className,
-            tabIndex: this.props.tabIndex,
-            style: _extends({
-              display: 'inline'
-            }, this.props.style)
-          },
-          this.props.children
-        );
-      } else {
-        return _react2.default.createElement(
-          'div',
-          {
-            ref: this.tooltipDOM,
-            title: this.props.title,
-            className: this.props.className,
-            tabIndex: this.props.tabIndex,
-            style: _extends({
-              display: 'inline'
-            }, this.props.style)
-          },
-          this.props.children
-        );
-      }
+      var Base = this.props.useSpan ? Span : Div;
+      _react2.default.createElement(
+        Base,
+        {
+          ref: this.tooltipDOM,
+          title: this.props.title,
+          className: this.props.className,
+          tabIndex: this.props.tabIndex,
+          style: _extends({
+            display: 'inline'
+          }, this.props.style)
+        },
+        this.props.children
+      );
     }
   }]);
 

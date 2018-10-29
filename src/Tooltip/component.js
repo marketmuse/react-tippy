@@ -249,37 +249,19 @@ class Tooltip extends Component {
   }
 
   render() {
-    if (this.props.useSpan) {
-      return (
-        <span
-          ref={this.tooltipDOM}
-          title={this.props.title}
-          className={this.props.className}
-          tabIndex={this.props.tabIndex}
-          style={{
-            display: 'inline',
-            ...this.props.style
-          }}
-        >
-          {this.props.children}
-        </span>
-      );
-    } else {
-      return (
-        <div
-          ref={this.tooltipDOM}
-          title={this.props.title}
-          className={this.props.className}
-          tabIndex={this.props.tabIndex}
-          style={{
-            display: 'inline',
-            ...this.props.style
-          }}
-        >
-          {this.props.children}
-        </div>
-      );
-    }
+    const Base = this.props.useSpan ? Span : Div;
+    <Base
+      ref={this.tooltipDOM}
+      title={this.props.title}
+      className={this.props.className}
+      tabIndex={this.props.tabIndex}
+      style={{
+        display: 'inline',
+        ...this.props.style
+      }}
+    >
+      {this.props.children}
+    </Base>
   }
 }
 
