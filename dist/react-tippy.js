@@ -559,7 +559,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         this.tippy.show(popper, this.props.duration);
       }
     }
@@ -570,7 +570,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         this.tippy.hide(popper, this.props.hideDuration);
       }
     }
@@ -581,7 +581,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         this.tippy.updateSettings(popper, name, value);
       }
     }
@@ -593,7 +593,7 @@ var Tooltip = function (_Component) {
       }
       if (this.tippy) {
         this.updateSettings('reactDOM', this.props.html);
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         var isVisible = popper.style.visibility === 'visible' || this.props.open;
         if (isVisible) {
           this.tippy.updateForReact(popper, this.props.html);
@@ -607,7 +607,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         this.tippy.update(popper);
       }
     }
@@ -618,8 +618,8 @@ var Tooltip = function (_Component) {
         return;
       }
       if (!this.props.disabled) {
-        // this.tooltipDOM.setAttribute('title', this.props.title);
-        this.tippy = (0, _tippy2.default)(this.tooltipDOM, {
+        this.tooltipDOM.current.setAttribute('title', this.props.title);
+        this.tippy = (0, _tippy2.default)(this.tooltipDOM.current, {
           disabled: this.props.disabled,
           position: this.props.position,
           animation: this.props.animation,
@@ -672,7 +672,7 @@ var Tooltip = function (_Component) {
         return;
       }
       if (this.tippy) {
-        var popper = this.tippy.getPopperElement(this.tooltipDOM);
+        var popper = this.tippy.getPopperElement(this.tooltipDOM.current);
         this.updateSettings('open', false);
         this.tippy.hide(popper, 0);
         this.tippy.destroy(popper);

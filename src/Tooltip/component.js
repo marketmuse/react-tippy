@@ -133,7 +133,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       this.tippy.show(popper, this.props.duration);
     }
   }
@@ -143,7 +143,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       this.tippy.hide(popper, this.props.hideDuration);
     }
   }
@@ -153,7 +153,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       this.tippy.updateSettings(popper, name, value);
     }
   }
@@ -164,7 +164,7 @@ class Tooltip extends Component {
     }
     if (this.tippy) {
       this.updateSettings('reactDOM', this.props.html);
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       const isVisible = popper.style.visibility === 'visible' || this.props.open;
       if (isVisible) {
         this.tippy.updateForReact(popper, this.props.html);
@@ -177,7 +177,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       this.tippy.update(popper);
     }
   }
@@ -187,8 +187,8 @@ class Tooltip extends Component {
       return;
     }
     if (!this.props.disabled) {
-      // this.tooltipDOM.setAttribute('title', this.props.title);
-      this.tippy = tippy(this.tooltipDOM, {
+      this.tooltipDOM.current.setAttribute('title', this.props.title);
+      this.tippy = tippy(this.tooltipDOM.current, {
         disabled: this.props.disabled,
         position: this.props.position,
         animation: this.props.animation,
@@ -240,7 +240,7 @@ class Tooltip extends Component {
       return;
     }
     if (this.tippy) {
-      const popper = this.tippy.getPopperElement(this.tooltipDOM);
+      const popper = this.tippy.getPopperElement(this.tooltipDOM.current);
       this.updateSettings('open', false);
       this.tippy.hide(popper, 0);
       this.tippy.destroy(popper);
