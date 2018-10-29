@@ -64,6 +64,8 @@ class Tooltip extends Component {
     this.showTooltip = this._showTooltip.bind(this);
     this.hideTooltip = this._hideTooltip.bind(this);
     this.updateSettings = this._updateSettings.bind(this);
+
+    this.tooltipDOM = React.createRef();
   }
 
   componentDidMount() {
@@ -250,7 +252,7 @@ class Tooltip extends Component {
     const Base = this.props.useSpan ? Span : Div;
     return (
       <Base
-        ref={(tooltip) => { this.tooltipDOM = tooltip; }}
+        ref={this.tooltipDOM}
         title={this.props.title}
         className={this.props.className}
         tabIndex={this.props.tabIndex}
