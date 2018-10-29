@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import tippy from './js/tippy';
 
 const defaultProps = {
+  useSpan: false,
   html: null,
   position: 'top',
   animation: 'shift',
@@ -21,17 +22,17 @@ const defaultProps = {
   followCursor: false,
   inertia: false,
   popperOptions: {},
-  onShow: () => {},
-  onShown: () => {},
-  onHide: () => {},
-  onHidden: () => {},
+  onShow: () => { },
+  onShown: () => { },
+  onHide: () => { },
+  onHidden: () => { },
   disabled: false,
   arrowSize: 'regular',
   size: 'regular',
   className: '',
   style: {},
   distance: 10,
-  onRequestClose: () => {},
+  onRequestClose: () => { },
   sticky: false,
   stickyDuration: 200,
   touchHold: false,
@@ -50,6 +51,9 @@ const detectPropsChanged = (props, prevProps) => {
   return result;
 }
 
+const Div = ({ children, ...rest }) => <div {...rest}>{children}</div>;
+const Span = ({ children, ...rest }) => <span {...rest}>{children}</span>;
+
 class Tooltip extends Component {
   constructor(props) {
     super(props);
@@ -63,14 +67,14 @@ class Tooltip extends Component {
   }
 
   componentDidMount() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     this.initTippy();
   }
 
   componentWillUnmount() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     this.destroyTippy();
@@ -78,7 +82,7 @@ class Tooltip extends Component {
 
   componentDidUpdate(prevProps) {
     // enable and disabled
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.props.disabled === false && prevProps.disabled === true) {
@@ -123,7 +127,7 @@ class Tooltip extends Component {
   }
 
   _showTooltip() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -133,7 +137,7 @@ class Tooltip extends Component {
   }
 
   _hideTooltip() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -143,7 +147,7 @@ class Tooltip extends Component {
   }
 
   _updateSettings(name, value) {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -153,7 +157,7 @@ class Tooltip extends Component {
   }
 
   _updateReactDom() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -167,7 +171,7 @@ class Tooltip extends Component {
   }
 
   _updateTippy() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -177,7 +181,7 @@ class Tooltip extends Component {
   }
 
   _initTippy() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (!this.props.disabled) {
@@ -230,7 +234,7 @@ class Tooltip extends Component {
   }
 
   _destroyTippy() {
-    if (typeof window === 'undefined' || typeof document === 'undefined' ) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
     if (this.tippy) {
@@ -243,8 +247,9 @@ class Tooltip extends Component {
   }
 
   render() {
+    const Base = this.props.useSpan ? Span : Div;
     return (
-      <div
+      <Base
         ref={(tooltip) => { this.tooltipDOM = tooltip; }}
         title={this.props.title}
         className={this.props.className}
@@ -255,7 +260,7 @@ class Tooltip extends Component {
         }}
       >
         {this.props.children}
-      </div>
+      </Base>
     );
   }
 }

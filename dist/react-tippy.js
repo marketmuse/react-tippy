@@ -16,9 +16,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -119,12 +119,11 @@ var Selectors = exports.Selectors = {
   ARROW: '[x-arrow]',
   TOOLTIPPED_EL: '[data-tooltipped]',
   CONTROLLER: '[data-tippy-controller]'
-};
 
-/**
-* The default settings applied to each instance
-*/
-var Defaults = exports.Defaults = {
+  /**
+  * The default settings applied to each instance
+  */
+};var Defaults = exports.Defaults = {
   html: false,
   position: 'top',
   animation: 'shift',
@@ -159,13 +158,12 @@ var Defaults = exports.Defaults = {
   popperOptions: {},
   open: undefined,
   onRequestClose: function onRequestClose() {}
-};
 
-/**
-* The keys of the defaults object for reducing down into a new object
-* Used in `getIndividualSettings()`
-*/
-var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
+  /**
+  * The keys of the defaults object for reducing down into a new object
+  * Used in `getIndividualSettings()`
+  */
+};var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
 
 /***/ }),
 /* 1 */
@@ -396,7 +394,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 var defaultProps = {
+  useSpan: false,
   html: null,
   position: 'top',
   animation: 'shift',
@@ -443,6 +444,27 @@ var detectPropsChanged = function detectPropsChanged(props, prevProps) {
     }
   });
   return result;
+};
+
+var Div = function Div(_ref) {
+  var children = _ref.children,
+      rest = _objectWithoutProperties(_ref, ['children']);
+
+  return _react2.default.createElement(
+    'div',
+    rest,
+    children
+  );
+};
+var Span = function Span(_ref2) {
+  var children = _ref2.children,
+      rest = _objectWithoutProperties(_ref2, ['children']);
+
+  return _react2.default.createElement(
+    'span',
+    rest,
+    children
+  );
 };
 
 var Tooltip = function (_Component) {
@@ -660,8 +682,9 @@ var Tooltip = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      var Base = this.props.useSpan ? Span : Div;
       return _react2.default.createElement(
-        'div',
+        Base,
         {
           ref: function ref(tooltip) {
             _this3.tooltipDOM = tooltip;
