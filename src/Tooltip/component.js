@@ -64,8 +64,6 @@ class Tooltip extends Component {
     this.showTooltip = this._showTooltip.bind(this);
     this.hideTooltip = this._hideTooltip.bind(this);
     this.updateSettings = this._updateSettings.bind(this);
-
-    this.tooltipDOM = React.createRef();
   }
 
   componentDidMount() {
@@ -249,21 +247,37 @@ class Tooltip extends Component {
   }
 
   render() {
-    const Base = this.props.useSpan ? Span : Div;
-    return (
-      <Base
-        ref={this.tooltipDOM}
-        title={this.props.title}
-        className={this.props.className}
-        tabIndex={this.props.tabIndex}
-        style={{
-          display: 'inline',
-          ...this.props.style
-        }}
-      >
-        {this.props.children}
-      </Base>
-    );
+    if (this.props.useSpan) {
+      return (
+        <span
+          ref={(tooltip) => { this.tooltipDOM = tooltip; }}
+          title={this.props.title}
+          className={this.props.className}
+          tabIndex={this.props.tabIndex}
+          style={{
+            display: 'inline',
+            ...this.props.style
+          }}
+        >
+          {this.props.children}
+        </span>
+      );
+    } else {
+      return (
+        <div
+          ref={(tooltip) => { this.tooltipDOM = tooltip; }}
+          title={this.props.title}
+          className={this.props.className}
+          tabIndex={this.props.tabIndex}
+          style={{
+            display: 'inline',
+            ...this.props.style
+          }}
+        >
+          {this.props.children}
+        </div>
+      );
+    }
   }
 }
 
