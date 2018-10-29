@@ -1,6 +1,6 @@
 {
   "name": "@marketmuse/react-tippy",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "React tippy",
   "main": "dist/react-tippy.js",
   "files": [

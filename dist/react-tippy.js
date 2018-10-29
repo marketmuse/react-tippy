@@ -482,6 +482,8 @@ var Tooltip = function (_Component) {
     _this.showTooltip = _this._showTooltip.bind(_this);
     _this.hideTooltip = _this._hideTooltip.bind(_this);
     _this.updateSettings = _this._updateSettings.bind(_this);
+
+    _this.tooltipDOM = _react2.default.createRef();
     return _this;
   }
 
@@ -680,15 +682,11 @@ var Tooltip = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       if (this.props.useSpan) {
         return _react2.default.createElement(
           'span',
           {
-            ref: function ref(tooltip) {
-              _this3.tooltipDOM = tooltip;
-            },
+            ref: this.tooltipDOM,
             title: this.props.title,
             className: this.props.className,
             tabIndex: this.props.tabIndex,
@@ -702,9 +700,7 @@ var Tooltip = function (_Component) {
         return _react2.default.createElement(
           'div',
           {
-            ref: function ref(tooltip) {
-              _this3.tooltipDOM = tooltip;
-            },
+            ref: this.tooltipDOM,
             title: this.props.title,
             className: this.props.className,
             tabIndex: this.props.tabIndex,
