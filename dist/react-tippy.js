@@ -2212,7 +2212,14 @@ var Tippy = function () {
           reactInstance = _data$settings.reactInstance;
 
       if (useContext) {
-        _reactDom2.default.unstable_renderSubtreeIntoContainer(data.settings.reactInstance, updatedContent, tooltipContent);
+        _reactDom2.default.createPortal(updatedContent, tooltipContent);
+        /*
+        ReactDOM.unstable_renderSubtreeIntoContainer(
+          data.settings.reactInstance,
+          updatedContent,
+          tooltipContent,
+        );
+        */
       } else {
         _reactDom2.default.render(updatedContent, tooltipContent);
       }
